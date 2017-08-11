@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="umnog" size="1.000000 1.445489" />
+    <ImageTarget name="ravno" size="1.000000 1.445489" />
+    <ImageTarget name="plus" size="1.000000 1.445489" />
+    <ImageTarget name="minus" size="1.000000 1.398649" />
+    <ImageTarget name="menshe" size="1.000000 1.443609" />
+    <ImageTarget name="delen" size="1.000000 1.445489" />
+    <ImageTarget name="bolshe" size="1.000000 1.445489" />
+  </Tracking>
+</QCARConfig>

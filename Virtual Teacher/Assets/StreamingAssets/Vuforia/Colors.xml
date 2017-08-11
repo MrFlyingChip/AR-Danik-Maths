@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="yellov" size="1.000000 1.441948" />
+    <ImageTarget name="white" size="1.000000 1.398649" />
+    <ImageTarget name="pink" size="1.000000 1.398649" />
+    <ImageTarget name="orange" size="1.000000 1.441948" />
+    <ImageTarget name="green" size="1.000000 1.398649" />
+    <ImageTarget name="gray" size="1.000000 1.441948" />
+    <ImageTarget name="brown" size="1.000000 1.441948" />
+    <ImageTarget name="blue" size="1.000000 1.398649" />
+    <ImageTarget name="blac" size="1.000000 1.441948" />
+    <ImageTarget name="red" size="1.000000 1.398649" />
+  </Tracking>
+</QCARConfig>

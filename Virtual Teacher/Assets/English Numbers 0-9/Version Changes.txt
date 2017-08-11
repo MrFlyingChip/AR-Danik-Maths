@@ -1,0 +1,10 @@
+1.0.2
+- [New] Include UI/DefaultETC1 shader
+- [Fix] Missed references
+
+1.0.1
+- [New] Unity 5.5 upgrade
+- [Fix ] Missed Group tag bug
+
+1.0.0
+- First release

@@ -1,0 +1,12 @@
+﻿<Properties StartupItem="Virtual Teacher.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\QRcode\Scripts\QREncodeTest.cs">
+    <Files>
+      <File FileName="Assets\QRcode\Scripts\QREncodeTest.cs" Line="30" Column="17" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
