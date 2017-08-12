@@ -78,20 +78,25 @@ namespace Vuforia
             Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
             Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
 
-            // Enable rendering:
-            foreach (Renderer component in rendererComponents)
-            {
-                component.enabled = true;
-            }
+            //// Enable rendering:
+            //foreach (Renderer component in rendererComponents)
+            //{
+            //    component.enabled = true;
+            //}
 
-            // Enable colliders:
-            foreach (Collider component in colliderComponents)
-            {
-                component.enabled = true;
-            }
+            //// Enable colliders:
+            //foreach (Collider component in colliderComponents)
+            //{
+            //    component.enabled = true;
+            //}
             cardNumberController.RegisterID(cardID, gameObject);
 
-
+            if (cardNumberController.animated)
+            {
+                child.transform.localScale = new Vector3(10f, 10f, 10f);
+                cardNumberController.Visualize();
+                
+            }
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
         }
 
@@ -102,18 +107,25 @@ namespace Vuforia
             Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
             Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
 
-            // Disable rendering:
-            foreach (Renderer component in rendererComponents)
-            {
-                component.enabled = false;
-            }
+            //// Disable rendering:
+            //foreach (Renderer component in rendererComponents)
+            //{
+            //    component.enabled = false;
+            //}
 
-            // Disable colliders:
-            foreach (Collider component in colliderComponents)
-            {
-                component.enabled = false;
-            }
+            //// Disable colliders:
+            //foreach (Collider component in colliderComponents)
+            //{
+            //    component.enabled = false;
+            //}
 
+            if(child != null)
+            {
+                
+                child.GetComponent<BallAnimation>().HideBall();
+
+            }
+            GameObject.Find("SoundManager").GetComponent<AudioSource>().Stop();
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
         }
 

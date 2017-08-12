@@ -48,20 +48,29 @@ public class BallAnimation : MonoBehaviour {
         }
     }
 
+    public void HideBall()
+    {
+        GetComponent<Animator>().SetBool("Ready", false);
+        mesh.SetActive(true);
+        verevka.SetActive(true);
+        bomb.SetActive(false);
+        gameObject.SetActive(false);
+    }
+
     public void BallToIdle()
     {
         GetComponent<Animator>().SetBool("Ready", false);
         mesh.SetActive(true);
         verevka.SetActive(true);
         bomb.SetActive(false);
-        //if (GameObject.Find("BackCameraController").GetComponent<BackCameraController>().questType != 6 && GetComponent<Animator>().GetBool("Correct"))
-        //{
-        //    GameObject.Find("BackCameraController").GetComponent<BackCameraController>().GenerateQuest();
-        //}
-        //else if (!GetComponent<Animator>().GetBool("Correct"))
-        //{
-        //    GameObject.Find("BackCameraController").GetComponent<BackCameraController>().GenerateQuest();
-        //}
+        if (GameObject.Find("BackCameraController").GetComponent<BackCameraController>().questType != 6 && GetComponent<Animator>().GetBool("Correct"))
+        {
+            GameObject.Find("BackCameraController").GetComponent<BackCameraController>().GenerateQuest();
+        }
+        else if (!GetComponent<Animator>().GetBool("Correct"))
+        {
+            GameObject.Find("BackCameraController").GetComponent<BackCameraController>().GenerateQuest();
+        }
         gameObject.SetActive(false);
     }
 

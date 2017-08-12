@@ -30,7 +30,7 @@ public class BackCameraController : MonoBehaviour
 
     public SoundManager sound;
 
-    private bool animated = true;
+    public bool animated = true;
     public bool gameStarted;
 
     public bool ballGo;
@@ -331,7 +331,7 @@ public class BackCameraController : MonoBehaviour
             sound.WrongSound();
             GenerateQuest();
         }
-        StartCoroutine(Wait());
+        //StartCoroutine(Wait());
     }
 
     public IEnumerator Wait()
@@ -372,14 +372,14 @@ public class BackCameraController : MonoBehaviour
             sound.WrongSound();
             GenerateQuest();
         }
-        if (images[0].GetComponent<Vuforia.BackCameraTarget>().cardID == correctNumber)
+        else if (images[0].GetComponent<Vuforia.BackCameraTarget>().cardID == correctNumber)
         {
-            StartCoroutine(WaitForNewQuest(8));
+            //StartCoroutine(WaitForNewQuest(8));
             if (images[0].GetComponentInChildren<Animator>() != null) images[0].GetComponentInChildren<Animator>().SetBool("Correct", true);
         }
         else
         {
-            StartCoroutine(WaitForNewQuest(9));
+            //StartCoroutine(WaitForNewQuest(9));
             if (images[0].GetComponentInChildren<Animator>() != null) images[0].GetComponentInChildren<Animator>().SetBool("Correct", false);
         }
     }
@@ -398,13 +398,13 @@ public class BackCameraController : MonoBehaviour
         images[1].GetComponent<Vuforia.BackCameraTarget>().child.SetActive(true);
         if (cardNumber == correctNumber)
         {
-            if(questType != 6) StartCoroutine(WaitForNewQuest(8));
+            //if(questType != 6) StartCoroutine(WaitForNewQuest(8));
             if (images[0].GetComponentInChildren<Animator>() != null) images[0].GetComponentInChildren<Animator>().SetBool("Correct", true);
             if (images[1].GetComponentInChildren<Animator>() != null) images[1].GetComponentInChildren<Animator>().SetBool("Correct", true);
         }
         else
         {
-            StartCoroutine(WaitForNewQuest(9));
+            //StartCoroutine(WaitForNewQuest(9));
             if (images[0].GetComponentInChildren<Animator>() != null) images[0].GetComponentInChildren<Animator>().SetBool("Correct", false);
             if (images[1].GetComponentInChildren<Animator>() != null) images[1].GetComponentInChildren<Animator>().SetBool("Correct", false);
         }
