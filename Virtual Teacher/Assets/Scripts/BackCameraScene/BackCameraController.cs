@@ -367,6 +367,11 @@ public class BackCameraController : MonoBehaviour
         ballGo = true;
         backCameraUI.Display(correctStr);
         images[0].GetComponent<Vuforia.BackCameraTarget>().child.SetActive(true);
+        if (images[0].GetComponent<Vuforia.BackCameraTarget>().cardID >= 10)
+        {
+            sound.WrongSound();
+            GenerateQuest();
+        }
         if (images[0].GetComponent<Vuforia.BackCameraTarget>().cardID == correctNumber)
         {
             StartCoroutine(WaitForNewQuest(8));
@@ -376,11 +381,6 @@ public class BackCameraController : MonoBehaviour
         {
             StartCoroutine(WaitForNewQuest(9));
             if (images[0].GetComponentInChildren<Animator>() != null) images[0].GetComponentInChildren<Animator>().SetBool("Correct", false);
-        }
-        if (images[0].GetComponent<Vuforia.BackCameraTarget>().cardID >= 10)
-        {
-            sound.WrongSound();
-            GenerateQuest();
         }
     }
 
