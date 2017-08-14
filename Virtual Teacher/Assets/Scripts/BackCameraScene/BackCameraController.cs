@@ -366,7 +366,7 @@ public class BackCameraController : MonoBehaviour
     {
         ballGo = true;
         backCameraUI.Display(correctStr);
-        images[0].GetComponent<Vuforia.BackCameraTarget>().child.SetActive(true);
+        if(images[0].GetComponent<Vuforia.BackCameraTarget>().child != null) images[0].GetComponent<Vuforia.BackCameraTarget>().child.SetActive(true);
         if (images[0].GetComponent<Vuforia.BackCameraTarget>().cardID >= 10)
         {
             sound.WrongSound();

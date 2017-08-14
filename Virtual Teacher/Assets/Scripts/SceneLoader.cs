@@ -9,4 +9,12 @@ public class SceneLoader : MonoBehaviour {
     {
         SceneManager.LoadScene(scene);
     }
+
+    public void LoadQRCodeGenerator(int scene)
+    {
+        if (PlayerPrefs.HasKey("Quest1") && PlayerPrefs.HasKey("Quest2") && PlayerPrefs.HasKey("Quest3"))
+        {
+            SceneManager.LoadScene(scene);
+        }
+    }
 }

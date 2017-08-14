@@ -91,12 +91,31 @@ namespace Vuforia
             //}
             cardNumberController.RegisterID(cardID, gameObject);
 
-            if (cardNumberController.animated)
+            if (cardNumberController.images.Count == 1)
             {
-                child.transform.localScale = new Vector3(10f, 10f, 10f);
-                cardNumberController.Visualize();
-                
+                if (gameObject == cardNumberController.images[0])
+                {
+                    if (cardNumberController.animated)
+                    {
+                        child.transform.localScale = new Vector3(10f, 10f, 10f);
+                        cardNumberController.Visualize();
+
+                    }
+                }
             }
+            else
+            {
+                if (gameObject == cardNumberController.images[0] || gameObject == cardNumberController.images[1])
+                {
+                    if (cardNumberController.animated)
+                    {
+                        child.transform.localScale = new Vector3(10f, 10f, 10f);
+                        cardNumberController.Visualize();
+
+                    }
+                }
+            }
+            
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
         }
 
