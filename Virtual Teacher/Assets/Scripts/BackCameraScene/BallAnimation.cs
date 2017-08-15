@@ -76,7 +76,6 @@ public class BallAnimation : MonoBehaviour {
 
     public void DestroyBall()
     {
-        sound.WrongSound();
         if (GetComponent<Animator>().GetInteger("Type") == 1) GameObject.Find("Canvas").GetComponent<UIController>().StartGame(n);
         else if (GetComponent<Animator>().GetInteger("Type") == 2)
         {

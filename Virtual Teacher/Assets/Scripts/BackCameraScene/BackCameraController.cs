@@ -328,49 +328,26 @@ public class BackCameraController : MonoBehaviour
         }
         else
         {
-            sound.WrongSound();
-            GenerateQuest();
+            StartCoroutine(Wait());
         }
-        //StartCoroutine(Wait());
     }
 
     public IEnumerator Wait()
     {
-        yield return new WaitForSeconds(20);
-        if (!canRegister && animated && !ballGo)
-        {
-            sound.WrongSound();
-            GenerateQuest();
-        }
+        sound.WrongSound();
+        backCameraUI.Display(correctStr);
+        yield return new WaitForSeconds(3);
+        GenerateQuest();   
     }
 
-    public IEnumerator WaitForNewQuest(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-
-        //sound.WrongSound();
-        if (images.Count == 1)
-        {
-            images[0].GetComponent<Vuforia.BackCameraTarget>().child.SetActive(false);
-        }
-        else if (images.Count == 2)
-        {
-            images[0].GetComponent<Vuforia.BackCameraTarget>().child.SetActive(false);
-            images[1].GetComponent<Vuforia.BackCameraTarget>().child.SetActive(false);
-        }
-        GenerateQuest();
-       
-    }
-
-    public void ProceedOneCard()
+       public void ProceedOneCard()
     {
         ballGo = true;
         backCameraUI.Display(correctStr);
         if(images[0].GetComponent<Vuforia.BackCameraTarget>().child != null) images[0].GetComponent<Vuforia.BackCameraTarget>().child.SetActive(true);
         if (images[0].GetComponent<Vuforia.BackCameraTarget>().cardID >= 10)
         {
-            sound.WrongSound();
-            GenerateQuest();
+            StartCoroutine(Wait());
         }
         else if (images[0].GetComponent<Vuforia.BackCameraTarget>().cardID == correctNumber)
         {
@@ -398,13 +375,11 @@ public class BackCameraController : MonoBehaviour
         images[1].GetComponent<Vuforia.BackCameraTarget>().child.SetActive(true);
         if (cardNumber == correctNumber)
         {
-            //if(questType != 6) StartCoroutine(WaitForNewQuest(8));
             if (images[0].GetComponentInChildren<Animator>() != null) images[0].GetComponentInChildren<Animator>().SetBool("Correct", true);
             if (images[1].GetComponentInChildren<Animator>() != null) images[1].GetComponentInChildren<Animator>().SetBool("Correct", true);
         }
         else
         {
-            //StartCoroutine(WaitForNewQuest(9));
             if (images[0].GetComponentInChildren<Animator>() != null) images[0].GetComponentInChildren<Animator>().SetBool("Correct", false);
             if (images[1].GetComponentInChildren<Animator>() != null) images[1].GetComponentInChildren<Animator>().SetBool("Correct", false);
         }
@@ -413,18 +388,6 @@ public class BackCameraController : MonoBehaviour
             GenerateQuest();
         }
 
-    }
-
-    private void Correct()
-    {
-        GetComponent<AudioSource>().Play();
-        GenerateQuest();
-    }
-
-    private void Wrong()
-    {
-        Handheld.Vibrate();
-        GenerateQuest();
     }
 
     public void StartGame()

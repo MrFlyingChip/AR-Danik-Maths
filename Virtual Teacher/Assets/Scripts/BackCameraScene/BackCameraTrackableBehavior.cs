@@ -99,7 +99,6 @@ namespace Vuforia
             warning.SetActive(true);
             Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
             Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
-
             // Disable rendering:
             foreach (Renderer component in rendererComponents)
             {
