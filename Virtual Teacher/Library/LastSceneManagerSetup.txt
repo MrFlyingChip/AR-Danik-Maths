@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/BackCameraScene.unity
+- path: Assets/Scenes/GenerateQRScene.unity
   isLoaded: 1
   isActive: 1

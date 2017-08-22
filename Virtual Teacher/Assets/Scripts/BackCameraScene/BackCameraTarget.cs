@@ -140,9 +140,9 @@ namespace Vuforia
 
             if(child != null)
             {
-                
-                child.GetComponent<BallAnimation>().HideBall();
 
+                if (child.GetComponent<BallAnimation>() != null) child.GetComponent<BallAnimation>().HideBall();
+                else child.SetActive(false);
             }
             GameObject.Find("SoundManager").GetComponent<AudioSource>().Stop();
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");

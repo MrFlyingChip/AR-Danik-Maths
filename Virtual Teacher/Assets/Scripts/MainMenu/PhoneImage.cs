@@ -11,6 +11,7 @@ public class PhoneImage : MonoBehaviour {
 
     public FrontCameraButton front;
 
+    public string QuestName;
     public void ChangeQuestionMark()
     {
         questionMark.GetComponent<Animator>().SetBool("IsReady", true);
@@ -23,8 +24,12 @@ public class PhoneImage : MonoBehaviour {
 
     public void LoadScene(int scene)
     {
-        if (MainMenuController.paid == 1)
+        if (PlayerPrefs.GetString(QuestName) != "Played")
         {
+            if (PlayerPrefs.GetString(QuestName) != "Paid")
+            {
+                PlayerPrefs.SetString(QuestName, "Played");
+            }
             SceneManager.LoadScene(scene);
         }
         else

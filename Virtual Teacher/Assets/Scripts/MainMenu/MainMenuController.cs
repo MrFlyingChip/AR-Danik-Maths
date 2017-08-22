@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Security.Cryptography;
 using System.Text;
+using UnityEngine.Purchasing;
 
 [Serializable]
 public class Language
@@ -28,6 +29,8 @@ public class MainMenuController : MonoBehaviour {
     private string currentLinkToPDF;
     private int currentLanguage;
 
+    public Image motherModeButton;
+    public Sprite hasQuests;
 
     public static int paid;
     public GameObject paidMessageBox;
@@ -35,7 +38,7 @@ public class MainMenuController : MonoBehaviour {
     public string serverResponse;
 
     public Text buyText;
-
+    public GameObject invalid;
 	// Use this for initialization
 	void Start () {
         if (PlayerPrefs.HasKey("Language"))
@@ -56,9 +59,48 @@ public class MainMenuController : MonoBehaviour {
         {
             PlayerPrefs.SetInt("Paid", 0);
         }
-        
+
+        if (!PlayerPrefs.HasKey("Game1") && !PlayerPrefs.HasKey("Game2") && !PlayerPrefs.HasKey("Mother") && !PlayerPrefs.HasKey("Code"))
+        {
+            PlayerPrefs.SetString("Game1",  "none");
+            PlayerPrefs.SetString("Game2", "none");
+            PlayerPrefs.SetString("Mother", "none");
+            PlayerPrefs.SetString("Code", "none");
+        }
+
+        if (PlayerPrefs.HasKey("Quest1") && PlayerPrefs.HasKey("Quest2") && PlayerPrefs.HasKey("Quest3"))
+        {
+            motherModeButton.sprite = hasQuests;
+        }
+        PurchaseManager.OnPurchaseNonConsumable += PurchaseManager_OnPurchaseNonConsumable;
 	}
-	
+
+    private void PurchaseManager_OnPurchaseNonConsumable(PurchaseEventArgs args)
+    {
+        if(args.purchasedProduct.definition.id == "game")
+        {
+            PlayerPrefs.SetString("Game1", "Paid");
+            PlayerPrefs.SetString("Game2", "Paid");
+            PlayerPrefs.SetString("Mother", "Paid");
+            SceneManager.LoadScene(0);
+        }
+    }
+
+    public void LoadMother()
+    {
+        if (PlayerPrefs.GetString("Mother") != "Played")
+        {
+            if (PlayerPrefs.GetString("Mother") != "Paid")
+            {
+                PlayerPrefs.SetString("Mother", "Played");
+            }
+            SceneManager.LoadScene(8);
+        }
+        else
+        {
+            paidMessageBox.SetActive(true);
+        }
+    }
 
 	// Update is called once per frame
 	void Update () {
@@ -66,8 +108,13 @@ public class MainMenuController : MonoBehaviour {
         {
             paid = 1;
             PlayerPrefs.SetInt("Paid", paid);
+            invalid.SetActive(false);
             paidMessageBox.SetActive(false);
             SceneManager.LoadScene(0);
+        }
+        else if(serverResponse == "{\"status\":\"1\"}")
+        {
+            invalid.SetActive(true);
         }
     }
 

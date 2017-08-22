@@ -76,6 +76,7 @@ public class CardsController : MonoBehaviour {
 
     public void Visualize()
     {
+        currentCard = 0;
         animated = true;
         if (IDs.Count == 3)
         {
@@ -251,13 +252,21 @@ public class CardsController : MonoBehaviour {
             }
             else
             {
-                for(int i = 0; i < images.Count; i++)
+                sound.WrongSound();
+                for (int i = 0; i < images.Count; i++)
                 {
                     images[i].GetComponent<Vuforia.BackCameraTrackableBehavior>().children.GetComponent<Animator>().SetBool("Correct", false);
                 }
             }
         }
         
+    }
+
+    public void ShowCurrentBall()
+    {
+        images[currentCard].GetComponent<Vuforia.BackCameraTrackableBehavior>().children.SetActive(true);
+        images[currentCard].GetComponent<Vuforia.BackCameraTrackableBehavior>().children.GetComponent<Animator>().SetInteger("Type", 4);
+        images[currentCard].GetComponent<Vuforia.BackCameraTrackableBehavior>().children.GetComponent<Animator>().SetBool("Correct", true);
     }
 
 }

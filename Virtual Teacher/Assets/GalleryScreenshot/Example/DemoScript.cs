@@ -3,12 +3,14 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.IO;
+using UnityEngine.Purchasing;
 
 public class DemoScript : MonoBehaviour {
 
 	public bool hideGUI = false;
 	public Texture2D texture;
 
+    public GameObject paidMessageBox;
 
     public RawImage qrCodeImage;
     public RawImage qrCodeImage2;
@@ -22,6 +24,9 @@ public class DemoScript : MonoBehaviour {
     public Text text1;
     public Text text2;
 
+    public GameObject home;
+    public GameObject ok;
+
     public GameObject homeButton;
     
     void OnEnable ()
@@ -30,7 +35,8 @@ public class DemoScript : MonoBehaviour {
 		ScreenshotManager.OnScreenshotTaken += ScreenshotTaken;
 		ScreenshotManager.OnScreenshotSaved += ScreenshotSaved;	
 		ScreenshotManager.OnImageSaved += ImageSaved;
-	}
+        PurchaseManager.OnPurchaseNonConsumable += PurchaseManager_OnPurchaseNonConsumable;
+    }
 
 	void OnDisable ()
 	{
@@ -41,9 +47,29 @@ public class DemoScript : MonoBehaviour {
 
 	public void OnSaveScreenshotPress()
 	{
-        Show();
-        ScreenshotManager.SaveScreenshot("Math", "AR DANIK Maths", "png");
-        StartCoroutine(ShowHome());
+        if (PlayerPrefs.GetString("Code") != "Played")
+        {
+            if (PlayerPrefs.GetString("Code") != "Paid")
+            {
+                PlayerPrefs.SetString("Code", "Played");
+            }
+            Show();
+            ScreenshotManager.SaveScreenshot("Math", "AR Danik Maths", "png");
+            StartCoroutine(ShowHome());
+        }
+        else
+        {
+            paidMessageBox.SetActive(true);
+        }
+        
+    }
+
+    private void PurchaseManager_OnPurchaseNonConsumable(PurchaseEventArgs args)
+    {
+        if (args.purchasedProduct.definition.id == "code")
+        {
+            PlayerPrefs.SetString("Code", "Paid");
+        }
     }
 
     public IEnumerator ShowHome()
@@ -76,6 +102,8 @@ public class DemoScript : MonoBehaviour {
 
     public void Show()
     {
+        home.SetActive(true);
+        ok.SetActive(true);
         QROutput.SetActive(true);
         text1.text = if1.text;
         text2.text = if2.text;

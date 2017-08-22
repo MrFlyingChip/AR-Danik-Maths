@@ -41,8 +41,8 @@ public class QRDecodeTest : MonoBehaviour
         }
         else if (this.resetBtn != null)
 		{
-			this.resetBtn.SetActive(true);
-		}
+            SceneManager.LoadScene(20);
+        }
 		if (this.scanLineObj != null)
 		{
 			this.scanLineObj.SetActive(false);

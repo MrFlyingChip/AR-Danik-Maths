@@ -33,7 +33,7 @@ public class BallAnimation : MonoBehaviour {
 
     public void BreakBall()
     {
-        sound.BallBreakSound();
+        sound.WrongSound();
     }
     public void BreakBallUncorrect()
     {
