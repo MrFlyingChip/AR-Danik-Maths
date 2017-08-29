@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Quest1Controller : MonoBehaviour, CardsNumberController
 {
@@ -169,6 +170,17 @@ public class Quest1Controller : MonoBehaviour, CardsNumberController
         numberImage.sprite = numberSprites[currentCardNumber];
         textImage.gameObject.SetActive(true);
         textImage.sprite = textSprites[currentCardNumber];
+        StartCoroutine(WaitBeforeGo());
+    }
+
+    public IEnumerator WaitBeforeGo()
+    {
+        yield return new WaitForSeconds(4);
+        if (PlayerPrefs.GetString("Game1") != "Paid")
+        {
+            PlayerPrefs.SetString("Game1", "Played");
+            SceneManager.LoadScene(0);
+        }
     }
 
     public void ChangeCardType()

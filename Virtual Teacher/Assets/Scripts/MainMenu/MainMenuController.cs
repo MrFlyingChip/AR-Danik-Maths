@@ -34,10 +34,12 @@ public class MainMenuController : MonoBehaviour {
 
     public static int paid;
     public GameObject paidMessageBox;
+    public GameObject paidMessageBox1;
     public InputField paidText;
     public string serverResponse;
 
     public Text buyText;
+    public Text buyText1;
     public GameObject invalid;
 	// Use this for initialization
 	void Start () {
@@ -60,14 +62,30 @@ public class MainMenuController : MonoBehaviour {
             PlayerPrefs.SetInt("Paid", 0);
         }
 
-        if (!PlayerPrefs.HasKey("Game1") && !PlayerPrefs.HasKey("Game2") && !PlayerPrefs.HasKey("Mother") && !PlayerPrefs.HasKey("Code"))
+        if (!PlayerPrefs.HasKey("Game1") && !PlayerPrefs.HasKey("Game2"))
         {
             PlayerPrefs.SetString("Game1",  "none");
             PlayerPrefs.SetString("Game2", "none");
+        }
+        if (!PlayerPrefs.HasKey("Mother"))
+        {
             PlayerPrefs.SetString("Mother", "none");
+        }
+        if (!PlayerPrefs.HasKey("Code"))
+        {
             PlayerPrefs.SetString("Code", "none");
         }
+        if (PurchaseManager.CheckBuyState("code1"))
+        {
+            PlayerPrefs.SetString("Code", "Paid");
 
+        }
+        if (PurchaseManager.CheckBuyState("game"))
+        {
+            PlayerPrefs.SetString("Game1", "Paid");
+            PlayerPrefs.SetString("Game2", "Paid");
+            PlayerPrefs.SetString("Mother", "Paid");
+        }
         if (PlayerPrefs.HasKey("Quest1") && PlayerPrefs.HasKey("Quest2") && PlayerPrefs.HasKey("Quest3"))
         {
             motherModeButton.sprite = hasQuests;
@@ -84,17 +102,31 @@ public class MainMenuController : MonoBehaviour {
             PlayerPrefs.SetString("Mother", "Paid");
             SceneManager.LoadScene(0);
         }
+        else if (args.purchasedProduct.definition.id == "code1")
+        {
+            PlayerPrefs.SetString("Code", "Paid");
+            SceneManager.LoadScene(0);
+        }
     }
 
     public void LoadMother()
     {
+        if (PlayerPrefs.GetString("Code") != "Played")
+        {
+            SceneManager.LoadScene(8);
+        }
+        else
+        {
+            paidMessageBox1.SetActive(true);
+        }
+    }
+
+    public void LoadCode()
+    {
         if (PlayerPrefs.GetString("Mother") != "Played")
         {
-            if (PlayerPrefs.GetString("Mother") != "Paid")
-            {
-                PlayerPrefs.SetString("Mother", "Played");
-            }
-            SceneManager.LoadScene(8);
+            
+            SceneManager.LoadScene(20);
         }
         else
         {
@@ -102,19 +134,27 @@ public class MainMenuController : MonoBehaviour {
         }
     }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
         if (serverResponse == "{\"status\":\"0\"}")
         {
             paid = 1;
-            PlayerPrefs.SetInt("Paid", paid);
+            PlayerPrefs.SetString("Game1", "Paid");
+            PlayerPrefs.SetString("Game2", "Paid");
             invalid.SetActive(false);
             paidMessageBox.SetActive(false);
             SceneManager.LoadScene(0);
         }
         else if(serverResponse == "{\"status\":\"1\"}")
         {
+            
             invalid.SetActive(true);
+            invalid.GetComponent<Text>().text = "Invalid Code!";
+        }
+        else if (serverResponse == "{\"status\":\"2\"}")
+        {
+            invalid.SetActive(true);
+            invalid.GetComponent<Text>().text = "Limit Reached!";
         }
     }
 
@@ -130,6 +170,7 @@ public class MainMenuController : MonoBehaviour {
         }
         languages[currentLanguage].SetNewLanguage(languageImage, ref currentLinkToPDF);
         buyText.text = languages[currentLanguage].buyText;
+        buyText1.text = languages[currentLanguage].buyText;
         PlayerPrefs.SetInt("Language", currentLanguage);
     }
 
@@ -145,7 +186,7 @@ public class MainMenuController : MonoBehaviour {
 
     public void ShowPaidMessageBox()
     {
-        if (paid == 0)
+        if (PlayerPrefs.GetString("Game1") != "Paid")
         {
             paidMessageBox.SetActive(true);
         }

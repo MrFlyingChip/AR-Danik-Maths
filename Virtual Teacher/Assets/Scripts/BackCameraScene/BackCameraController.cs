@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class BackCameraController : MonoBehaviour
 {
     public static int currentNumber;
@@ -330,6 +330,7 @@ public class BackCameraController : MonoBehaviour
         {
             StartCoroutine(Wait());
         }
+        StartCoroutine(WaitBeforeGo());
     }
 
     public IEnumerator Wait()
@@ -340,7 +341,17 @@ public class BackCameraController : MonoBehaviour
         GenerateQuest();   
     }
 
-       public void ProceedOneCard()
+    public IEnumerator WaitBeforeGo()
+    {
+        yield return new WaitForSeconds(10);
+        if (PlayerPrefs.GetString("Game2") != "Paid")
+        {
+            PlayerPrefs.SetString("Game2", "Played");
+            SceneManager.LoadScene(0);
+        }
+    }
+
+    public void ProceedOneCard()
     {
         ballGo = true;
         backCameraUI.Display(correctStr);

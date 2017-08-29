@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Quest2Controller : MonoBehaviour, CardsNumberController
@@ -152,10 +153,21 @@ public class Quest2Controller : MonoBehaviour, CardsNumberController
         ShowCorrectAnswer();
     }
 
+    public IEnumerator WaitBeforeGo()
+    {
+        yield return new WaitForSeconds(5);
+        if (PlayerPrefs.GetString("Game1") != "Paid")
+        {
+            PlayerPrefs.SetString("Game1", "Played");
+            SceneManager.LoadScene(0);
+        }
+    }
+
     public void ShowCorrectAnswer()
     {
         questionMark.GetComponent<Animator>().SetBool("IsReady", isReady);
         questionMark.GetComponent<Animator>().SetInteger("ID", correctID);
+        StartCoroutine(WaitBeforeGo());
     }
 
     public void ChangeCardType()

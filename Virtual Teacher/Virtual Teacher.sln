@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2017
+# Visual Studio 2015
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Virtual Teacher.Plugins", "Virtual Teacher.Plugins.csproj", "{18660352-27EF-510D-5DE3-15B8D6FEA0B8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Virtual Teacher", "Virtual Teacher.csproj", "{8A8C682C-64AB-9879-B4F4-3E02769670C7}"

@@ -47,21 +47,14 @@ public class DemoScript : MonoBehaviour {
 
 	public void OnSaveScreenshotPress()
 	{
-        if (PlayerPrefs.GetString("Code") != "Played")
-        {
+       
             if (PlayerPrefs.GetString("Code") != "Paid")
             {
                 PlayerPrefs.SetString("Code", "Played");
             }
             Show();
             ScreenshotManager.SaveScreenshot("Math", "AR Danik Maths", "png");
-            StartCoroutine(ShowHome());
-        }
-        else
-        {
-            paidMessageBox.SetActive(true);
-        }
-        
+        StartCoroutine(ShowHome());   
     }
 
     private void PurchaseManager_OnPurchaseNonConsumable(PurchaseEventArgs args)

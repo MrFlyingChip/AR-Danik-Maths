@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public class Quest
@@ -208,6 +209,17 @@ public class Quest3Controller : MonoBehaviour, CardsNumberController
         questionMark.GetComponent<Image>().sprite = types[currentType].typeSprites[correctID];
         cardImage3.gameObject.SetActive(true);
         cardImage3.sprite = types[currentType].typeSprites[correctID];
+        StartCoroutine(WaitBeforeGo());
+    }
+
+    public IEnumerator WaitBeforeGo()
+    {
+        yield return new WaitForSeconds(5);
+        if (PlayerPrefs.GetString("Game1") != "Paid")
+        {
+            PlayerPrefs.SetString("Game1", "Played");
+            SceneManager.LoadScene(0);
+        }
     }
 
     public void ChangeCardType()

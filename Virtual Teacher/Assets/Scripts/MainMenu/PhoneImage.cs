@@ -26,10 +26,6 @@ public class PhoneImage : MonoBehaviour {
     {
         if (PlayerPrefs.GetString(QuestName) != "Played")
         {
-            if (PlayerPrefs.GetString(QuestName) != "Paid")
-            {
-                PlayerPrefs.SetString(QuestName, "Played");
-            }
             SceneManager.LoadScene(scene);
         }
         else

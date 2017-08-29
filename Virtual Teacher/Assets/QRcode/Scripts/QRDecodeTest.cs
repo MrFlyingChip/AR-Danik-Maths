@@ -37,6 +37,10 @@ public class QRDecodeTest : MonoBehaviour
             PlayerPrefs.SetString("Quest1", quests[0]);
             PlayerPrefs.SetString("Quest2", quests[1]);
             PlayerPrefs.SetString("Quest3", quests[2]);
+            if (PlayerPrefs.GetString("Mother") != "Paid")
+            {
+                PlayerPrefs.SetString("Mother", "Played");
+            }
             SceneManager.LoadScene(0);
         }
         else if (this.resetBtn != null)
