@@ -10,7 +10,7 @@ public class MultiPlication : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         GetComponent<Image>().sprite = sprites[PlayerPrefs.GetInt("Language")];
-        if (PlayerPrefs.GetString("Code") != "Paid")
+        if (PlayerPrefs.GetString("Code") == "Played")
         {
             fuck.SetActive(false);
         }
