@@ -35,7 +35,6 @@ public class DemoScript : MonoBehaviour {
 		ScreenshotManager.OnScreenshotTaken += ScreenshotTaken;
 		ScreenshotManager.OnScreenshotSaved += ScreenshotSaved;	
 		ScreenshotManager.OnImageSaved += ImageSaved;
-        PurchaseManager.OnPurchaseNonConsumable += PurchaseManager_OnPurchaseNonConsumable;
     }
 
 	void OnDisable ()
@@ -46,8 +45,7 @@ public class DemoScript : MonoBehaviour {
 	}
 
 	public void OnSaveScreenshotPress()
-	{
-       
+	{  
             if (PlayerPrefs.GetString("Code") != "Paid")
             {
                 PlayerPrefs.SetString("Code", "Played");
@@ -55,14 +53,6 @@ public class DemoScript : MonoBehaviour {
             Show();
             ScreenshotManager.SaveScreenshot("Math", "AR Danik Maths", "png");
         StartCoroutine(ShowHome());   
-    }
-
-    private void PurchaseManager_OnPurchaseNonConsumable(PurchaseEventArgs args)
-    {
-        if (args.purchasedProduct.definition.id == "code")
-        {
-            PlayerPrefs.SetString("Code", "Paid");
-        }
     }
 
     public IEnumerator ShowHome()
