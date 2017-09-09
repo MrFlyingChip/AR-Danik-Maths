@@ -123,7 +123,7 @@ public class MainMenuController : MonoBehaviour {
 
     public void LoadCode()
     {
-        if (PlayerPrefs.GetString("Mother") != "Played")
+        if (PlayerPrefs.GetString("Mother") == "Paid")
         {
             
             SceneManager.LoadScene(20);
